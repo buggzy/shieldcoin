@@ -1,0 +1,11 @@
+.DS_Store
+.agent-results/
+__pycache__/
+*.pyc
+node_modules/
+artifacts/
+cache/
+out/
+coverage/
+types/
+typechain-types/
