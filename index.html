@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHIELDCOIN — Shieldcoin.solx</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="path">contracts/Shieldcoin.solx</p>
+          <h1>SHIELDCOIN Token Contract</h1>
+        </div>
+        <a class="source-link" href="https://github.com/buggzy/shieldcoin">Open repository</a>
+      </header>
+
+
+      <section class="source-panel" aria-label="Shieldcoin Solx source code">
+        <div class="source-bar">
+          <span>Solx</span>
+          <button id="copy-source" type="button">Copy</button>
+        </div>
+        <pre><code id="contract-source">Loading contracts/Shieldcoin.solx…</code></pre>
+      </section>
+    </main>
+
+    <script>
+      const sourceElement = document.querySelector("#contract-source");
+      const copyButton = document.querySelector("#copy-source");
+
+      fetch("contracts/Shieldcoin.solx")
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.text();
+        })
+        .then((source) => {
+          sourceElement.textContent = source;
+          copyButton.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(source);
+            copyButton.textContent = "Copied";
+          });
+        })
+        .catch(() => {
+          sourceElement.textContent = "Unable to load contracts/Shieldcoin.solx.";
+          copyButton.hidden = true;
+        });
+    </script>
+  </body>
+</html>

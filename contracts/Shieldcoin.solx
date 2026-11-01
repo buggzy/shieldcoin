@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: MIT
+solx 0.1 for evm 0.8.24
+
+use PausableWithReason from "./PausableWithReason.sol"
+
+/// Fixed-supply ERC-20 displayed by the project site.
+token Shieldcoin(initialHolder: address)
+    extends PausableWithReason(initialHolder)
+{
+    identity "SHIELDCOIN" as "SHD" with 18 decimals
+    supply fixed 1_000_000_000 tokens -> initialHolder
+
+    reject initialHolder == zero with InvalidReceiver
+
+    approvals {
+        reject spender == zero with InvalidSpender
+        infinite allowance is uint256.max
+        spend allowance[from][caller]
+            else InsufficientAllowance(available, required)
+        emit Approval after approve and finite spend
+    }
+
+    transfers whenNotPaused {
+        reject from == zero with InvalidSender
+        reject to == zero with InvalidReceiver
+
+        debit balanceOf[from]
+            else InsufficientBalance(available, required)
+    }
+}

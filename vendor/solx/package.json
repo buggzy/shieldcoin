@@ -1,0 +1,12 @@
+{
+  "name": "solx",
+  "version": "0.0.1",
+  "private": true,
+  "bin": {
+    "solx-darwin-arm64": "bin/solx-darwin-arm64",
+    "solx-linux-x64": "bin/solx-linux-x64"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}
